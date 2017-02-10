@@ -1,5 +1,6 @@
 import OverflowCell from './OverflowCell';
 import rowComparer from './RowComparer';
+import { ContextMenuTrigger } from 'react-contextmenu';
 const React = require('react');
 const joinClasses = require('classnames');
 const Cell = require('./Cell');
@@ -201,12 +202,13 @@ const Row = React.createClass({
 
     let cells = this.getCells();
     return (
-      <div {...this.getKnownDivProps()} className = { className } style= { style } onDragEnter= { this.handleDragEnter } >
+      <ContextMenuTrigger id={`cmtrig-${this.props.idx}`}> <div {...this.getKnownDivProps()} className = { className } style= { style } onDragEnter= { this.handleDragEnter } >
         {
           React.isValidElement(this.props.row) ?
             this.props.row : cells
         }
       </div >
+       </ContextMenuTrigger>
     );
   }
 });
