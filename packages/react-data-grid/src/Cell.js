@@ -104,8 +104,9 @@ const Cell = React.createClass({
   },
 
   onCellContextMenu() {
+    let editorOpen = this.isEditorOpen();
     let meta = this.props.cellMetaData;
-    if (meta != null && meta.onCellContextMenu && typeof (meta.onCellContextMenu) === 'function') {
+    if (meta != null && meta.onCellContextMenu && typeof (meta.onCellContextMenu) === 'function' && !editorOpen) {
       meta.onCellContextMenu({ rowIdx: this.props.rowIdx, idx: this.props.idx });
     }
   },
@@ -241,6 +242,13 @@ const Cell = React.createClass({
     let meta = this.props.cellMetaData;
     if (meta == null) { return false; }
     return meta.enableCellSelect;
+  },
+
+  isEditorOpen() {
+    if (document.getElementsByClassName('react-grid-Canvas')[0]) {
+      return document.getElementsByClassName('react-grid-Canvas')[0].className.indexOf('opaque') > -1;
+    }
+    return false;
   },
 
   hasChangedDependentValues(nextProps) {
