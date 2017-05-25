@@ -78,16 +78,16 @@ describe('<Viewport />', () => {
     expect(Canvas).toBeDefined();
   });
 
-  it('should updated scroll state onScroll', () => {
+  fit('should updated scroll state onScroll', () => {
     let scrollLeft = 0;
     let scrollTop = 200;
     const wrapper = shallow(<Viewport {...viewportProps} />);
     let Canvas = wrapper.find('Canvas');
     Canvas.props().onScroll({ scrollTop, scrollLeft});
     expect(wrapper.state()).toEqual({
-      colDisplayEnd: 3,
+      colDisplayEnd: 2,
       colDisplayStart: 0,
-      colVisibleEnd: 3,
+      colVisibleEnd: 2,
       colVisibleStart: 0,
       displayEnd: 25,
       displayStart: 0,
